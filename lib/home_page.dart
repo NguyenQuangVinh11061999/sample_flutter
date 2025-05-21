@@ -122,14 +122,70 @@ _listNFT() {
 
 _itemNFT() {
   return Container(
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-        transform: Transform.rotate(angle: 0.5),
-        colors: [Colors.red, Colors.orange],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      ),
+    margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+    child: Stack(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(30),
+          child: Image.asset("assets/images/img_banner.jpg", fit: BoxFit.cover),
+        ),
+        Padding(
+          padding: EdgeInsets.all(15),
+          child: Row(
+            mainAxisAlignment:
+                MainAxisAlignment.spaceBetween, // // cho sát bên phải c1
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Nft dami Name",
+                    style: TextStyle(fontSize: 13, color: Colors.white),
+                  ),
+                  Text(
+                    "By hedman",
+                    style: TextStyle(fontSize: 10, color: Colors.white),
+                  ),
+                ],
+              ),
+              //    Spacer(), // cho sát bên phải c2
+              Image.asset("assets/images/favorite.png"),
+            ],
+          ),
+        ),
+        Positioned(
+          bottom: 10,
+          left: 10,
+          right: 10,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(40)),
+              shape: BoxShape.rectangle,
+              color: Color.fromARGB(40, 1, 1, 1),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Remaining time",
+                        style: TextStyle(fontSize: 10, color: Colors.white),
+                      ),
+                      Text(
+                        "23h : 41m : 12s",
+                        style: TextStyle(fontSize: 14, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     ),
-    child: Stack(children: [Text("data")]),
   );
 }

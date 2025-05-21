@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
+      debugShowCheckedModeBanner: false,
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -37,50 +38,52 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(30),
-                child: Text(
-                  "NFT",
-                  style: TextStyle(fontSize: 30, fontStyle: FontStyle.italic),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(30),
+                  child: Text(
+                    "NFT",
+                    style: TextStyle(fontSize: 30, fontStyle: FontStyle.italic),
+                  ),
                 ),
-              ),
-              _customImage(),
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
-                child: Text(
-                  "Find, Collect and Sell \n Amazing NFTs",
+                _customImage(),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
+                  child: Text(
+                    "Find, Collect and Sell \n Amazing NFTs",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                Text(
+                  "Explore the best collection’s of NFTs and buy and \n sell your NFTs as well",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 10),
                 ),
-              ),
-              Text(
-                "Explore the best collection’s of NFTs and buy and \n sell your NFTs as well",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 10),
-              ),
 
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/images/facebook.png',
-                      width: 50,
-                      height: 50,
-                    ),
-                    Image.asset(
-                      'assets/images/google.png',
-                      width: 50,
-                      height: 50,
-                    ),
-                  ],
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/facebook.png',
+                        width: 50,
+                        height: 50,
+                      ),
+                      Image.asset(
+                        'assets/images/google.png',
+                        width: 50,
+                        height: 50,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              _customButton(context),
-            ],
+                _customButton(context),
+              ],
+            ),
           ),
         ),
       ),
