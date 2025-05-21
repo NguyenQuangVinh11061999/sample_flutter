@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sample_flutter/test.dart';
+
+import 'home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -95,7 +96,7 @@ _customButton(BuildContext context) {
         context,
         MaterialPageRoute(
           builder: (builder) {
-            return HomePage();
+            return ScreenHomePage();
           },
         ),
       );

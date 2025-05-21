@@ -52,7 +52,11 @@ class ScreenHomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              Flexible(fit: FlexFit.loose, child: _listView()),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                height: 30,
+                child: _listView(),
+              ),
             ],
           ),
         ),
@@ -63,6 +67,7 @@ class ScreenHomePage extends StatelessWidget {
 
 _listView() {
   return ListView.builder(
+    scrollDirection: Axis.horizontal,
     itemCount: 4,
     itemBuilder: (BuildContext context, int index) {
       return _itemList();
@@ -72,12 +77,18 @@ _listView() {
 
 _itemList() {
   return Container(
+    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
     width: 100,
     height: 40,
+    alignment: Alignment.center,
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(10),
     ),
-    child: Text("Recent", style: TextStyle(fontWeight: FontWeight.bold)),
+    child: Text(
+      "Recent",
+      textAlign: TextAlign.center,
+      style: TextStyle(fontWeight: FontWeight.bold),
+    ),
   );
 }
