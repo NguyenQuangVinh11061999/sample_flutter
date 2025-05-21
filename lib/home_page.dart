@@ -54,9 +54,27 @@ class ScreenHomePage extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                height: 30,
+                height: 40,
                 child: _listView(),
               ),
+              Row(
+                children: [
+                  Text(
+                    "Recent Collection’s",
+                    style: TextStyle(fontSize: 14, color: Colors.white),
+                  ),
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.topRight,
+                      child: Text(
+                        "See all",
+                        style: TextStyle(fontSize: 12, color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(child: _listNFT()),
             ],
           ),
         ),
@@ -83,12 +101,35 @@ _itemList() {
     alignment: Alignment.center,
     decoration: BoxDecoration(
       color: Colors.white,
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(15),
     ),
     child: Text(
       "Recent",
       textAlign: TextAlign.center,
       style: TextStyle(fontWeight: FontWeight.bold),
     ),
+  );
+}
+
+_listNFT() {
+  return ListView.builder(
+    itemCount: 4,
+    itemBuilder: (BuildContext context, int index) {
+      return _itemNFT();
+    },
+  );
+}
+
+_itemNFT() {
+  return Container(
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        transform: Transform.rotate(angle: 0.5),
+        colors: [Colors.red, Colors.orange],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      ),
+    ),
+    child: Stack(children: [Text("data")]),
   );
 }
