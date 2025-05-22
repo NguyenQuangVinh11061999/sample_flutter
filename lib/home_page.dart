@@ -18,11 +18,13 @@ class ScreenHomePage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Column(
+                        mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             "NFT",
                             style: TextStyle(
+                              height: 0.6,
                               fontSize: 30,
                               color: Colors.white,
                               fontStyle: FontStyle.italic,
