@@ -10,71 +10,100 @@ class ScreenHomePage extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(20),
-          child: Column(
+          child: Stack(
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
+              Column(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
                     children: [
-                      Text(
-                        "NFT",
-                        style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.white,
-                          fontStyle: FontStyle.italic,
-                        ),
-                      ),
-                      Text(
-                        "Best NFT collection in one place",
-                        style: TextStyle(fontSize: 10, color: Colors.white),
-                      ),
-                    ],
-                  ),
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.topRight,
-                      child: Stack(
-                        alignment: Alignment.center,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.asset(
-                            "assets/images/icon.png",
-                            color: Colors.white,
+                          Text(
+                            "NFT",
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Colors.white,
+                              fontStyle: FontStyle.italic,
+                            ),
                           ),
-                          Image.asset(
-                            "assets/images/img_icon1.png",
-                            color: Colors.white,
+                          Text(
+                            "Best NFT collection in one place",
+                            style: TextStyle(fontSize: 10, color: Colors.white),
                           ),
                         ],
                       ),
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                height: 40,
-                child: _listView(),
-              ),
-              Row(
-                children: [
-                  Text(
-                    "Recent Collection’s",
-                    style: TextStyle(fontSize: 14, color: Colors.white),
-                  ),
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.topRight,
-                      child: Text(
-                        "See all",
-                        style: TextStyle(fontSize: 12, color: Colors.white),
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.topRight,
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Image.asset(
+                                "assets/images/icon.png",
+                                color: Colors.white,
+                              ),
+                              Image.asset(
+                                "assets/images/img_icon1.png",
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                    height: 40,
+                    child: _listView(),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "Recent Collection’s",
+                        style: TextStyle(fontSize: 14, color: Colors.white),
+                      ),
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.topRight,
+                          child: Text(
+                            "See all",
+                            style: TextStyle(fontSize: 12, color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Expanded(child: _listNFT()),
                 ],
               ),
-              Expanded(child: _listNFT()),
+              Positioned(
+                bottom: 40,
+                left: 10,
+                right: 10,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(40)),
+                    shape: BoxShape.rectangle,
+                    color: Colors.black.withOpacity(0.3),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(25),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image.asset("assets/images/home.png"),
+                        Image.asset("assets/images/search.png"),
+                        Image.asset("assets/images/send.png"),
+                        Image.asset("assets/images/safari.png"),
+                        Image.asset("assets/images/settings.png"),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -164,7 +193,7 @@ _itemNFT() {
               color: Color.fromARGB(40, 1, 1, 1),
             ),
             child: Padding(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(15),
               child: Row(
                 children: [
                   Column(
@@ -179,6 +208,34 @@ _itemNFT() {
                         style: TextStyle(fontSize: 14, color: Colors.white),
                       ),
                     ],
+                  ),
+                  Spacer(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Current Price",
+                        style: TextStyle(fontSize: 10, color: Colors.white),
+                      ),
+                      Text(
+                        "₹ 139.00",
+                        style: TextStyle(fontSize: 14, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      shape: BoxShape.circle,
+                    ),
+                    width: 50,
+                    height: 50,
+                    child: Image.asset(
+                      "assets/images/next_item.png",
+                      width: 24,
+                      height: 24,
+                    ),
                   ),
                 ],
               ),
