@@ -60,7 +60,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 Text(
                   "Explore the best collection’s of NFTs and buy and \n sell your NFTs as well",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 10),
+                  selectionColor: Colors.amber,
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontFamily: 'Times New Roman',
+                    wordSpacing: 2, // khoang cach chu
+                    letterSpacing: 2, // khoang cach ky tu
+                    decoration: TextDecoration.lineThrough, // kieu chu gach
+                  ),
                 ),
 
                 Container(
