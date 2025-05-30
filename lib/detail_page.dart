@@ -21,7 +21,7 @@ class DetailsPage extends StatelessWidget {
                     _headerDetail(),
                     SizedBox(height: 10),
                     SizedBox(
-                      height: 50,
+                      height: 35,
                       child: Flexible(fit: FlexFit.tight, child: _listTab()),
                     ),
 
@@ -252,7 +252,7 @@ Widget _listTab() {
 Widget _itemTab(BuildContext context) {
   return Container(
     margin: EdgeInsets.only(right: 10),
-    width: 150,
+    width: 120,
     child: ElevatedButton(
       onPressed: () {},
       child: Text("Recent", style: TextStyle(color: Colors.black)),
