@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample_flutter/detail_page.dart';
 
 class ScreenHomePage extends StatelessWidget {
   const ScreenHomePage({super.key});
@@ -17,25 +18,27 @@ class ScreenHomePage extends StatelessWidget {
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "NFT",
-                            style: TextStyle(
-                              height: 0.6,
-                              fontSize: 30,
-                              color: Colors.white,
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
-                          Text(
-                            "Best NFT collection in one place",
-                            style: TextStyle(fontSize: 10, color: Colors.white),
-                          ),
-                        ],
-                      ),
+                      // Column(
+                      //   mainAxisSize: MainAxisSize.min,
+                      //   crossAxisAlignment: CrossAxisAlignment.start,
+                      //   children: [
+                      //     Text(
+                      //       "NFT",
+                      //       style: TextStyle(
+                      //         height: 0.6,
+                      //         fontSize: 30,
+                      //         color: Colors.white,
+                      //         fontStyle: FontStyle.italic,
+                      //       ),
+                      //     ),
+                      //     Text(
+                      //       "Best NFT collection in one place",
+                      //       style: TextStyle(fontSize: 10, color: Colors.white),
+                      //     ),
+                      //   ],
+                      // ),
+                      _headerText(),
+
                       Expanded(
                         child: Container(
                           alignment: Alignment.topRight,
@@ -146,102 +149,142 @@ _listNFT() {
   return ListView.builder(
     itemCount: 4,
     itemBuilder: (BuildContext context, int index) {
-      return _itemNFT();
+      return _itemNFT(context);
     },
   );
 }
 
-_itemNFT() {
-  return Container(
-    margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-    child: Stack(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(30),
-          child: Image.asset("assets/images/img_banner.jpg", fit: BoxFit.cover),
+_itemNFT(BuildContext context) {
+  return GestureDetector(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (builder) {
+            return DetailsPage();
+          },
         ),
-        Padding(
-          padding: EdgeInsets.all(15),
-          child: Row(
-            mainAxisAlignment:
-                MainAxisAlignment.spaceBetween, // // cho sát bên phải c1
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Nft dami Name",
-                    style: TextStyle(fontSize: 13, color: Colors.white),
-                  ),
-                  Text(
-                    "By hedman",
-                    style: TextStyle(fontSize: 10, color: Colors.white),
-                  ),
-                ],
+      );
+    },
+    child: Container(
+      margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+      child: Stack(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(30),
+            child: Image.asset(
+              "assets/images/img_banner.jpg",
+              fit: BoxFit.cover,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(15),
+            child: Row(
+              mainAxisAlignment:
+                  MainAxisAlignment.spaceBetween, // // cho sát bên phải c1
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Nft dami Name",
+                      style: TextStyle(fontSize: 13, color: Colors.white),
+                    ),
+                    Text(
+                      "By hedman",
+                      style: TextStyle(fontSize: 10, color: Colors.white),
+                    ),
+                  ],
+                ),
+                //    Spacer(), // cho sát bên phải c2
+                Image.asset("assets/images/favorite.png"),
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 10,
+            left: 10,
+            right: 10,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(40)),
+                shape: BoxShape.rectangle,
+                color: Color.fromARGB(40, 1, 1, 1),
               ),
-              //    Spacer(), // cho sát bên phải c2
-              Image.asset("assets/images/favorite.png"),
-            ],
+              child: Padding(
+                padding: EdgeInsets.all(15),
+                child: Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Remaining time",
+                          style: TextStyle(fontSize: 10, color: Colors.white),
+                        ),
+                        Text(
+                          "23h : 41m : 12s",
+                          style: TextStyle(fontSize: 14, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                    Spacer(),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Current Price",
+                          style: TextStyle(fontSize: 10, color: Colors.white),
+                        ),
+                        Text(
+                          "₹ 139.00",
+                          style: TextStyle(fontSize: 14, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        shape: BoxShape.circle,
+                      ),
+                      width: 50,
+                      height: 50,
+                      child: Image.asset(
+                        "assets/images/next_item.png",
+                        width: 24,
+                        height: 24,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget _headerText() {
+  return RichText(
+    text: TextSpan(
+      children: <TextSpan>[
+        TextSpan(
+          text: "NFT\n",
+          style: TextStyle(
+            fontSize: 30,
+            color: Colors.white,
+            fontStyle: FontStyle.italic,
           ),
         ),
-        Positioned(
-          bottom: 10,
-          left: 10,
-          right: 10,
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(40)),
-              shape: BoxShape.rectangle,
-              color: Color.fromARGB(40, 1, 1, 1),
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(15),
-              child: Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Remaining time",
-                        style: TextStyle(fontSize: 10, color: Colors.white),
-                      ),
-                      Text(
-                        "23h : 41m : 12s",
-                        style: TextStyle(fontSize: 14, color: Colors.white),
-                      ),
-                    ],
-                  ),
-                  Spacer(),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Current Price",
-                        style: TextStyle(fontSize: 10, color: Colors.white),
-                      ),
-                      Text(
-                        "₹ 139.00",
-                        style: TextStyle(fontSize: 14, color: Colors.white),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      shape: BoxShape.circle,
-                    ),
-                    width: 50,
-                    height: 50,
-                    child: Image.asset(
-                      "assets/images/next_item.png",
-                      width: 24,
-                      height: 24,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+        TextSpan(
+          text: "Best NFT collection in one place",
+          style: TextStyle(
+            fontSize: 10,
+            color: Colors.white,
+            fontStyle: FontStyle.italic,
           ),
         ),
       ],
