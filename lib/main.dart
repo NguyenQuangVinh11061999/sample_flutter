@@ -16,6 +16,7 @@ Future<void> main() async {
       },
     ),
   );
+  dio.interceptors.add(LogInterceptor(responseBody: true));
 
   final client = RestClient(dio);
 
