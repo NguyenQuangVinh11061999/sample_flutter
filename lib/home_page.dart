@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sample_flutter/bloc/game_bloc.dart';
 import 'package:sample_flutter/detail_page.dart';
+import 'package:sample_flutter/model/game.dart';
+import 'package:sample_flutter/state/game_state.dart';
 
 class ScreenHomePage extends StatelessWidget {
   const ScreenHomePage({super.key});
@@ -18,25 +22,6 @@ class ScreenHomePage extends StatelessWidget {
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      // Column(
-                      //   mainAxisSize: MainAxisSize.min,
-                      //   crossAxisAlignment: CrossAxisAlignment.start,
-                      //   children: [
-                      //     Text(
-                      //       "NFT",
-                      //       style: TextStyle(
-                      //         height: 0.6,
-                      //         fontSize: 30,
-                      //         color: Colors.white,
-                      //         fontStyle: FontStyle.italic,
-                      //       ),
-                      //     ),
-                      //     Text(
-                      //       "Best NFT collection in one place",
-                      //       style: TextStyle(fontSize: 10, color: Colors.white),
-                      //     ),
-                      //   ],
-                      // ),
                       _headerText(),
 
                       Expanded(
@@ -81,7 +66,22 @@ class ScreenHomePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Expanded(child: _listNFT()),
+                  Expanded(
+                    child: BlocBuilder<GameBloc, GameState>(
+                      builder: (context, state) {
+                        if (state is GameLoading) {
+                          return Center(child: CircularProgressIndicator());
+                        } else if (state is GameLoaded) {
+                          return _listNFT(state.games);
+                        } else if (state is GameError) {
+                          return Center(child: Text("Error: ${state.message}"));
+                        }
+                        return Center(
+                          child: Text("Press button to load users"),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
               Positioned(
@@ -145,16 +145,16 @@ _itemList() {
   );
 }
 
-_listNFT() {
+_listNFT(List<Game> list) {
   return ListView.builder(
-    itemCount: 4,
+    itemCount: list.length,
     itemBuilder: (BuildContext context, int index) {
-      return _itemNFT(context);
+      return _itemNFT(context, list[index]);
     },
   );
 }
 
-_itemNFT(BuildContext context) {
+_itemNFT(BuildContext context, Game game) {
   return GestureDetector(
     onTap: () {
       Navigator.push(
@@ -172,10 +172,7 @@ _itemNFT(BuildContext context) {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(30),
-            child: Image.asset(
-              "assets/images/img_banner.jpg",
-              fit: BoxFit.cover,
-            ),
+            child: Image.network('${game.thumbnail}', fit: BoxFit.fill),
           ),
           Padding(
             padding: EdgeInsets.all(15),

@@ -1,9 +1,32 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sample_flutter/bloc/game_bloc.dart';
+import 'package:sample_flutter/event/game_event.dart';
 
+import 'api/client.dart';
 import 'home_page.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  final dio = Dio(
+    BaseOptions(
+      headers: {
+        "x-rapidapi-host": "mmo-games.p.rapidapi.com",
+        "x-rapidapi-key": "9b45e2a76bmsh94560e2b1722a4bp1b2a43jsna25826ace1ca",
+      },
+    ),
+  );
+
+  final client = RestClient(dio);
+
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => GameBloc(client)..add(FetchGames())),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +42,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: ""),
     );
   }
 }
