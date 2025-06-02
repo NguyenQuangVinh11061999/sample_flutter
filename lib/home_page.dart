@@ -172,8 +172,9 @@ _itemNFT(BuildContext context, Game game) {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(30),
-            child: Image.network(
-              '${game.thumbnail}',
+            child: FadeInImage.assetNetwork(
+              placeholder: 'assets/images/placeholder.png',
+              image: '${game.thumbnail}',
               width: double.infinity,
               fit: BoxFit.cover,
             ),
