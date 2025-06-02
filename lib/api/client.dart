@@ -11,4 +11,7 @@ abstract class RestClient {
 
   @GET("/games")
   Future<List<Game>> getGames();
+
+  @GET("/game")
+  Future<List<Game>> getGameDetails(@Query("id") int id);
 }
