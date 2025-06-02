@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:sample_flutter/model/game_detail.dart';
 
 import '../model/game.dart';
 
@@ -13,5 +14,5 @@ abstract class RestClient {
   Future<List<Game>> getGames();
 
   @GET("/game")
-  Future<List<Game>> getGameDetails(@Query("id") int id);
+  Future<GameDetail> getGameDetails(@Query("id") int id);
 }
