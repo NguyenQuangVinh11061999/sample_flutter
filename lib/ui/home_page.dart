@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_flutter/bloc/game_bloc.dart';
-import 'package:sample_flutter/detail_page.dart';
 import 'package:sample_flutter/model/game.dart';
 import 'package:sample_flutter/state/game_state.dart';
+import 'package:sample_flutter/ui/detail_page.dart';
 
 class ScreenHomePage extends StatelessWidget {
   const ScreenHomePage({super.key});

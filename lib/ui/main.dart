@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_flutter/bloc/game_bloc.dart';
 import 'package:sample_flutter/event/game_event.dart';
 
-import 'api/client.dart';
+import '../api/client.dart';
 import 'home_page.dart';
 
 Future<void> main() async {
