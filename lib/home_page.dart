@@ -92,7 +92,7 @@ class ScreenHomePage extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(40)),
                     shape: BoxShape.rectangle,
-                    color: Colors.black.withOpacity(0.3),
+                    color: Colors.black.withOpacity(0.7),
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(25),
@@ -172,7 +172,11 @@ _itemNFT(BuildContext context, Game game) {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(30),
-            child: Image.network('${game.thumbnail}', fit: BoxFit.fill),
+            child: Image.network(
+              '${game.thumbnail}',
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
           ),
           Padding(
             padding: EdgeInsets.all(15),
@@ -184,11 +188,11 @@ _itemNFT(BuildContext context, Game game) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Nft dami Name",
+                      "${game.title}",
                       style: TextStyle(fontSize: 13, color: Colors.white),
                     ),
                     Text(
-                      "By hedman",
+                      "${game.developer}",
                       style: TextStyle(fontSize: 10, color: Colors.white),
                     ),
                   ],
@@ -206,7 +210,7 @@ _itemNFT(BuildContext context, Game game) {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(40)),
                 shape: BoxShape.rectangle,
-                color: Color.fromARGB(40, 1, 1, 1),
+                color: Colors.black.withOpacity(0.4),
               ),
               child: Padding(
                 padding: EdgeInsets.all(15),
@@ -220,7 +224,7 @@ _itemNFT(BuildContext context, Game game) {
                           style: TextStyle(fontSize: 10, color: Colors.white),
                         ),
                         Text(
-                          "23h : 41m : 12s",
+                          "${game.releaseDate}",
                           style: TextStyle(fontSize: 14, color: Colors.white),
                         ),
                       ],

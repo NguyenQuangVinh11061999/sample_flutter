@@ -7,13 +7,16 @@ class Game {
   int? id;
   String? title;
   String? thumbnail;
+  @JsonKey(name: 'short_description')
   String? shortDescription;
   String? gameUrl;
   String? genre;
   String? platform;
   String? publisher;
   String? developer;
+  @JsonKey(name: 'release_date')
   String? releaseDate;
+  @JsonKey(name: 'profile_url')
   String? profileUrl;
 
   Game({
