@@ -18,14 +18,13 @@ class DetailsPage extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(10),
           child: Stack(
+            fit: StackFit.expand,
             children: [
               SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: BlocBuilder<GameDetailBloc, GameDetailState>(
                   builder: (context, state) {
-                    if (state is GameDetailLoading) {
-                      return Center(child: CircularProgressIndicator());
-                    } else if (state is GameDetailLoaded) {
+                    if (state is GameDetailLoaded) {
                       return Column(
                         children: [
                           _headerDetail(),
