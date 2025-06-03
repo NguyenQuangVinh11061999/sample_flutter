@@ -6,7 +6,7 @@ import '../model/game.dart';
 
 part 'client.g.dart';
 
-@RestApi(baseUrl: "https://mmo-games.p.rapidapi.com/")
+@RestApi()
 abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 

@@ -1,31 +1,25 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:sample_flutter/bloc/game_bloc.dart';
 import 'package:sample_flutter/bloc/game_detail_bloc.dart';
 import 'package:sample_flutter/event/game_event.dart';
 
-import '../api/client.dart';
-import 'home_page.dart';
+import 'ui/home_page.dart';
 
 Future<void> main() async {
-  final dio = Dio(
-    BaseOptions(
-      headers: {
-        "x-rapidapi-host": "mmo-games.p.rapidapi.com",
-        "x-rapidapi-key": "9b45e2a76bmsh94560e2b1722a4bp1b2a43jsna25826ace1ca",
-      },
-    ),
+  const environment = String.fromEnvironment('ENV', defaultValue: 'dev');
+  // Load đúng file env theo biến truyền vào
+  await dotenv.load(
+    fileName:
+        environment == 'prod' ? 'assets/env/.env.prod' : 'assets/env/.env.dev',
   );
-  dio.interceptors.add(LogInterceptor(responseBody: true));
-
-  final client = RestClient(dio);
 
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => GameBloc(client)..add(FetchGames())),
-        BlocProvider(create: (_) => GameDetailBloc(client)),
+        BlocProvider(create: (_) => GameBloc()..add(FetchGames())),
+        BlocProvider(create: (_) => GameDetailBloc()),
       ],
       child: const MyApp(),
     ),
