@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sample_flutter/bloc/game_bloc.dart';
+import 'package:sample_flutter/bloc/game_detail_bloc.dart';
 import 'package:sample_flutter/event/game_event.dart';
 
 import '../api/client.dart';
@@ -24,6 +25,7 @@ Future<void> main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => GameBloc(client)..add(FetchGames())),
+        BlocProvider(create: (_) => GameDetailBloc(client)),
       ],
       child: const MyApp(),
     ),

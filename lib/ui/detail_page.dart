@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:sample_flutter/bloc/game_detail_bloc.dart';
+import 'package:sample_flutter/model/game_detail.dart';
+import 'package:sample_flutter/state/game_detail_state.dart';
 
 class DetailsPage extends StatelessWidget {
   DetailsPage({super.key});
@@ -16,140 +21,160 @@ class DetailsPage extends StatelessWidget {
             children: [
               SingleChildScrollView(
                 scrollDirection: Axis.vertical,
-                child: Column(
-                  children: [
-                    _headerDetail(),
-                    SizedBox(height: 10),
-                    SizedBox(
-                      height: 35,
-                      child: Flexible(fit: FlexFit.tight, child: _listTab()),
-                    ),
-
-                    _nftDami(),
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 20),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(40),
-                        child: Image.asset('assets/images/img_banner.jpg'),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          child: Image.asset('assets/images/man.png'),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "User3243",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              Text(
-                                "By nft mentor",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Spacer(),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Current Price",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                              ),
-                            ),
-                            Text(
-                              "₹ 139.00",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: BlocBuilder<GameDetailBloc, GameDetailState>(
+                  builder: (context, state) {
+                    if (state is GameDetailLoading) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (state is GameDetailLoaded) {
+                      return Column(
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          _headerDetail(),
+                          SizedBox(height: 10),
+                          SizedBox(
+                            height: 35,
+                            child: Flexible(
+                              fit: FlexFit.tight,
+                              child: _listTab(),
+                            ),
+                          ),
+                          _nftDami(state.gameDetail),
+                          Container(
+                            width: double.infinity,
+                            margin: EdgeInsets.symmetric(vertical: 20),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(40),
+                              child: FadeInImage.assetNetwork(
+                                placeholder: 'assets/images/placeholder.png',
+                                image: '${state.gameDetail.thumbnail}',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Row(
                             children: [
-                              Text(
-                                "Remaining time",
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.white,
+                              CircleAvatar(
+                                child: Image.asset('assets/images/man.png'),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "User3243",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    Text(
+                                      "By nft mentor",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Text(
-                                "23h : 41m : 12s",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.white,
-                                ),
+                              Spacer(),
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Current Price",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                  Text(
+                                    "₹ 139.00",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
+                          Container(
+                            margin: EdgeInsets.only(top: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Remaining time",
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Text(
+                                      "${state.gameDetail.releaseDate}",
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
 
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Visitors",
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.white,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Visitors",
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Text(
+                                      "20.2k",
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              Text(
-                                "20.2k",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.white,
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 15),
+                            width: double.infinity,
+                            child: Text(
+                              "Detail’s:",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+
+                          Container(
+                            margin: EdgeInsets.only(top: 10),
+                            width: double.infinity,
+                            child: Html(
+                              data: '${state.gameDetail.description}',
+                              style: {
+                                "body": Style(
+                                  color:
+                                      Colors
+                                          .white, // Overrides all text to green
                                 ),
-                              ),
-                            ],
+                              },
+                            ),
                           ),
                         ],
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 15),
-                      width: double.infinity,
-                      child: Text(
-                        "Detail’s:",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-
-                    Container(
-                      margin: EdgeInsets.only(top: 10),
-                      width: double.infinity,
-                      child: Text(
-                        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi  ut aliquip ex ea commodo consequat. Duis aute irure dolor in  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla  pariatur.",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontFamily: 'Times New Roman',
-                        ),
-                        textAlign: TextAlign.justify,
-                      ),
-                    ),
-                  ],
+                      );
+                    } else if (state is GameDetailError) {
+                      return Center(child: Text("Error: ${state.message}"));
+                    } else {
+                      return Center(child: Text("Press button to load users"));
+                    }
+                  },
                 ),
               ),
               Align(
@@ -158,7 +183,7 @@ class DetailsPage extends StatelessWidget {
                   height: 60,
                   width: MediaQuery.of(context).size.width / 2,
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.08),
+                    color: Colors.black.withOpacity(0.7),
                     shape: BoxShape.rectangle,
                     borderRadius: BorderRadius.all(Radius.circular(30)),
                   ),
@@ -206,7 +231,7 @@ class DetailsPage extends StatelessWidget {
 //   }
 // }
 
-Widget _nftDami() {
+Widget _nftDami(GameDetail gameDetail) {
   return Padding(
     padding: EdgeInsets.only(top: 20),
     child: Row(
@@ -216,11 +241,11 @@ Widget _nftDami() {
           text: TextSpan(
             children: [
               TextSpan(
-                text: "Nft dami Name\n",
+                text: "${gameDetail.title}\n",
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
               TextSpan(
-                text: "By hedman",
+                text: "${gameDetail.developer}",
                 style: TextStyle(color: Colors.white, fontSize: 14),
               ),
             ],
