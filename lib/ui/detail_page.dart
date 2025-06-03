@@ -147,7 +147,7 @@ class DetailsPage extends StatelessWidget {
                             margin: EdgeInsets.only(top: 15),
                             width: double.infinity,
                             child: Text(
-                              "Detail’s:",
+                              "Detail’s: ",
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
